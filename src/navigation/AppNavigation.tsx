@@ -28,6 +28,7 @@ import {
     EditProfile,
     DishDescription,
 } from "../screens";
+import UserInfo from "../screens/UserInfo";
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,7 @@ export default function Navigation() {
                 <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
                 <Stack.Screen name="AddNewCard" component={AddNewCard} />
                 <Stack.Screen name="SignIn" component={SignIn} />
+                <Stack.Screen name="UserInfoScreen" component={UserInfo} />
                 <Stack.Screen name="MyAddress" component={MyAddress} />
                 <Stack.Screen name="MyPromocodes" component={MyPromocodes} />
                 <Stack.Screen
