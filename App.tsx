@@ -1,5 +1,5 @@
 import Navigation from "./src/navigation/AppNavigation";
-import React, {useCallback} from "react";
+import React from "react";
 import { useFonts } from 'expo-font';
 
 

@@ -1,18 +1,12 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 // @ts-ignore
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import { useNavigation } from "@react-navigation/native";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
+import {useNavigation} from "@react-navigation/native";
 
-import { AndroidSafeArea, COLORS, FONTS, SIZES } from "../constants";
-import { Button, InputField } from "../components";
-import {
-    FacebookSvg,
-    TwitterSvg,
-    GoogleSvg,
-    CheckSvg,
-    EyeOffSvg,
-} from "../svg";
+import {AndroidSafeArea, COLORS, FONTS, SIZES} from "../constants";
+import {Button, InputField} from "../components";
+import {CheckSvg, EyeOffSvg, FacebookSvg, GoogleSvg, TwitterSvg,} from "../svg";
 
 export default function SignUp() {
     const navigation = useNavigation();
@@ -37,44 +31,44 @@ export default function SignUp() {
                     Sign up
                 </Text>
                 <InputField
-                    containerStyle={{ marginBottom: 30 }}
+                    containerStyle={{marginBottom: 30}}
                     title="name"
                     placeholder="Darlene Robertson"
-                    icon={<CheckSvg />}
+                    icon={<CheckSvg/>}
                 />
                 <InputField
-                    containerStyle={{ marginBottom: 30 }}
+                    containerStyle={{marginBottom: 30}}
                     title="email"
                     placeholder="darlenerobertson@mail.com"
-                    icon={<CheckSvg />}
+                    icon={<CheckSvg/>}
                 />
                 <InputField
-                    containerStyle={{ marginBottom: 30 }}
+                    containerStyle={{marginBottom: 30}}
                     title="password"
                     placeholder="••••••••"
                     secureTextEntry={true}
                     icon={
                         <TouchableOpacity>
-                            <EyeOffSvg />
+                            <EyeOffSvg/>
                         </TouchableOpacity>
                     }
                 />
                 <InputField
-                    containerStyle={{ marginBottom: 30 }}
+                    containerStyle={{marginBottom: 30}}
                     title="confirm password"
                     placeholder="••••••••"
                     secureTextEntry={true}
                     icon={
                         <TouchableOpacity>
-                            <EyeOffSvg />
+                            <EyeOffSvg/>
                         </TouchableOpacity>
                     }
                 />
 
                 <Button
-                    title="sign up"
-                    containerStyle={{ marginBottom: 20 }}
-                    onPress={() => navigation.navigate("VerifyPhoneNumber" as never)}
+                    title="next"
+                    containerStyle={{marginBottom: 20}}
+                    onPress={() => navigation.navigate("UserInfoScreen" as never)}
                 />
                 <View
                     style={{
@@ -83,7 +77,7 @@ export default function SignUp() {
                         marginBottom: 63,
                     }}
                 >
-                    <Text style={{ color: COLORS.gray, ...FONTS.bodyText }}>
+                    <Text style={{color: COLORS.gray, ...FONTS.bodyText}}>
                         Already have an account?{" "}
                     </Text>
                     <TouchableOpacity
@@ -110,14 +104,14 @@ export default function SignUp() {
                         marginBottom: 30,
                     }}
                 >
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <FacebookSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <FacebookSvg/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <TwitterSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <TwitterSvg/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <GoogleSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <GoogleSvg/>
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
@@ -125,7 +119,7 @@ export default function SignUp() {
     }
 
     return (
-        <SafeAreaView style={{ ...AndroidSafeArea.AndroidSafeArea }}>
+        <SafeAreaView style={{...AndroidSafeArea.AndroidSafeArea}}>
             {renderContent()}
         </SafeAreaView>
     );

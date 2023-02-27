@@ -1,43 +1,19 @@
-import React, {useState} from 'react';
-import {useNavigation} from "@react-navigation/native";
-// @ts-ignore
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
+import React from 'react';
 import {AndroidSafeArea, COLORS, FONTS} from "../constants";
-import {Platform, SafeAreaView, Text, TouchableOpacity} from "react-native";
+import {SafeAreaView, Text, View} from "react-native";
 import {Button, Header, InputField} from "../components";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import {CheckSvg} from "../svg";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {useNavigation} from "@react-navigation/native";
+import PhoneInput from "react-native-phone-input";
 
-
-const UserInfo = () => {
+const UserAddress = () => {
     const navigation = useNavigation();
-    const [date, setDate] = useState(new Date(1676419200));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-
-    const onChange = (event: any, selectedDate: any) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
-        console.log(event)
-    };
-
-    const showMode = (currentMode: any) => {
-        if (Platform.OS === 'android') {
-            setShow(true);
-            // for iOS, add a button that closes the picker
-        }
-        setMode(currentMode);
-    };
-
-    const showDatepicker = () => {
-        showMode('date');
-    };
 
     function renderHeader() {
         return (
             <Header
-                title="Enter your personal information"
+                title="Enter your complete address"
                 goBack={true}
                 onPress={() => navigation.goBack()}
             />
@@ -61,54 +37,65 @@ const UserInfo = () => {
                         color: COLORS.black,
                     }}
                 >
-                    Personal info
+                    Complete address
                 </Text>
                 <InputField
                     containerStyle={{marginBottom: 30}}
-                    title="First name"
-                    placeholder="Darlene"
+                    title="Street number"
+                    placeholder="#"
                     icon={<CheckSvg/>}
                 />
                 <InputField
                     containerStyle={{marginBottom: 30}}
-                    title="Last name"
-                    placeholder="Robertson"
+                    title="Street name"
+                    placeholder="Street"
                     icon={<CheckSvg/>}
                 />
                 <InputField
                     containerStyle={{marginBottom: 30}}
-                    title="Email address"
-                    placeholder="xyz@mail.com"
+                    title="City"
+                    placeholder="City"
                     secureTextEntry={true}
                     icon={<CheckSvg/>}
                 />
-                <TouchableOpacity onPress={
-                    showDatepicker
-                }>
-                    <Text style={{marginTop: 10, marginBottom: 30}}>Date of Birth {date.toLocaleString()}</Text>
-                </TouchableOpacity>
-                {show && (
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode={"date"}
-                        is24Hour={true}
-                        onChange={onChange}
-                    />
-                )}
 
                 <InputField
                     containerStyle={{marginBottom: 30}}
-                    title="Screen Name"
-                    placeholder="Robertson"
+                    title="Country"
+                    placeholder="Country"
                     secureTextEntry={true}
                     icon={<CheckSvg/>}
                 />
+                <View style={{marginBottom: 30}}>
+                    <Text
+                        style={{
+                            ...FONTS.Lato_400Regular,
+                            fontSize: 12,
+                            textTransform: 'uppercase',
+                            marginBottom: 11,
+                            color: COLORS.gray,
+                        }}>
+                        phone number
+                    </Text>
+                    <PhoneInput
+                        style={{
+                            // @ts-ignore
+                            fontSize: 16,
+                            fontFamily: 'Lato-Regular',
+                            borderBottomWidth: 1,
+                            borderBottomColor: '#E2E2E2',
+                            paddingBottom: 10,
+                        }}
+                        placeholderTextColor={COLORS.black}
+                        initialCountry={'us'}
+                        // initialValue="0123456789"
+                    />
+                </View>
 
                 <Button
                     title="Next"
                     containerStyle={{marginBottom: 20}}
-                    onPress={() => navigation.navigate("UserAddress" as never)}
+                    onPress={() => navigation.navigate("VerifyPhoneNumber" as never)}
                 />
                 {/*<View*/}
                 {/*    style={{*/}
@@ -147,4 +134,4 @@ const UserInfo = () => {
     );
 };
 
-export default UserInfo;
+export default UserAddress;

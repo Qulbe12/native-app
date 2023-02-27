@@ -1,18 +1,13 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 // @ts-ignore
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import { useNavigation } from "@react-navigation/native";
-
-import { AndroidSafeArea, COLORS, FONTS, SIZES } from "../constants";
-import { Button, InputField } from "../components";
-import {
-    FacebookSvg,
-    TwitterSvg,
-    GoogleSvg,
-    CheckSvg,
-    EyeOffSvg,
-} from "../svg";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
+import {useNavigation} from "@react-navigation/native";
+import {AndroidSafeArea, COLORS, FONTS, SIZES} from "../constants";
+import {Button, InputField} from "../components";
+import {CheckSvg, EyeOffSvg, FacebookSvg, GoogleSvg, TwitterSvg,} from "../svg";
+// @ts-ignore
+import axios from 'axios';
 
 export default function SignIn() {
     const navigation = useNavigation();
@@ -38,19 +33,19 @@ export default function SignIn() {
                     Sign in
                 </Text>
                 <InputField
-                    containerStyle={{ marginBottom: 30 }}
+                    containerStyle={{marginBottom: 30}}
                     title="email"
                     placeholder="darlenerobertson@mail.com"
-                    icon={<CheckSvg />}
+                    icon={<CheckSvg/>}
                 />
                 <InputField
-                    containerStyle={{ marginBottom: 20 }}
+                    containerStyle={{marginBottom: 20}}
                     title="password"
                     placeholder="••••••••"
                     secureTextEntry={true}
                     icon={
                         <TouchableOpacity>
-                            <EyeOffSvg />
+                            <EyeOffSvg/>
                         </TouchableOpacity>
                     }
                 />
@@ -71,9 +66,11 @@ export default function SignIn() {
                 </TouchableOpacity>
 
                 <Button
-                    title="Next"
-                    containerStyle={{ marginBottom: 20 }}
-                    onPress={() => navigation.navigate("UserInfoScreen" as never)}
+                    title="Sign In"
+                    containerStyle={{marginBottom: 20}}
+                    onPress={() => {
+                        navigation.navigate("MainLayout" as never)
+                    }}
                 />
                 <Button
                     title="create account"
@@ -83,7 +80,7 @@ export default function SignIn() {
                         // @ts-ignore
                         marginBottom: SIZES.height * 0.1,
                     }}
-                    textStyle={{ color: COLORS.black }}
+                    textStyle={{color: COLORS.black}}
                     onPress={() => navigation.navigate("SignUp" as never)}
                 />
                 <View
@@ -94,14 +91,14 @@ export default function SignIn() {
                         marginBottom: 30,
                     }}
                 >
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <FacebookSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <FacebookSvg/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <TwitterSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <TwitterSvg/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginHorizontal: 7.5 }}>
-                        <GoogleSvg />
+                    <TouchableOpacity style={{marginHorizontal: 7.5}}>
+                        <GoogleSvg/>
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
@@ -109,7 +106,7 @@ export default function SignIn() {
     }
 
     return (
-        <SafeAreaView style={{ ...AndroidSafeArea.AndroidSafeArea }}>
+        <SafeAreaView style={{...AndroidSafeArea.AndroidSafeArea}}>
             {renderContent()}
         </SafeAreaView>
     );
