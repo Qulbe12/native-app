@@ -71,9 +71,9 @@ export default function SignIn() {
                 </TouchableOpacity>
 
                 <Button
-                    title="sign in"
+                    title="Next"
                     containerStyle={{ marginBottom: 20 }}
-                    onPress={() => navigation.navigate("MainLayout" as never)}
+                    onPress={() => navigation.navigate("UserInfoScreen" as never)}
                 />
                 <Button
                     title="create account"
