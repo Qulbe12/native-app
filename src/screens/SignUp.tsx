@@ -36,12 +36,12 @@ export default function SignUp() {
                     placeholder="Darlene Robertson"
                     icon={<CheckSvg/>}
                 />
-                <InputField
-                    containerStyle={{marginBottom: 30}}
-                    title="email"
-                    placeholder="darlenerobertson@mail.com"
-                    icon={<CheckSvg/>}
-                />
+                {/*<InputField*/}
+                {/*    containerStyle={{marginBottom: 30}}*/}
+                {/*    title="email"*/}
+                {/*    placeholder="darlenerobertson@mail.com"*/}
+                {/*    icon={<CheckSvg/>}*/}
+                {/*/>*/}
                 <InputField
                     containerStyle={{marginBottom: 30}}
                     title="password"
@@ -53,17 +53,17 @@ export default function SignUp() {
                         </TouchableOpacity>
                     }
                 />
-                <InputField
-                    containerStyle={{marginBottom: 30}}
-                    title="confirm password"
-                    placeholder="••••••••"
-                    secureTextEntry={true}
-                    icon={
-                        <TouchableOpacity>
-                            <EyeOffSvg/>
-                        </TouchableOpacity>
-                    }
-                />
+                {/*<InputField*/}
+                {/*    containerStyle={{marginBottom: 30}}*/}
+                {/*    title="confirm password"*/}
+                {/*    placeholder="••••••••"*/}
+                {/*    secureTextEntry={true}*/}
+                {/*    icon={*/}
+                {/*        <TouchableOpacity>*/}
+                {/*            <EyeOffSvg/>*/}
+                {/*        </TouchableOpacity>*/}
+                {/*    }*/}
+                {/*/>*/}
 
                 <Button
                     title="next"
