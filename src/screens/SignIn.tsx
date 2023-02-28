@@ -1,5 +1,5 @@
 import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
 import {useNavigation} from "@react-navigation/native";
@@ -8,9 +8,41 @@ import {Button, InputField} from "../components";
 import {CheckSvg, EyeOffSvg, FacebookSvg, GoogleSvg, TwitterSvg,} from "../svg";
 // @ts-ignore
 import axios from 'axios';
+import {useAppDispatch} from "../redux/Store";
+import {signInAction} from "../redux/actions/authAction";
+import * as yup from "yup";
+import {FormControl} from "native-base";
+
+const schema = yup.object().shape({
+    email: yup.string().required().email(),
+    password: yup.string().required(),
+});
 
 export default function SignIn() {
     const navigation = useNavigation();
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    })
+    const dispatch = useAppDispatch()
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const onSubmit = () => {
+        schema
+            .validate(form)
+            .then(() => {
+                dispatch(signInAction(form)).catch((err) => console.log(err));
+            })
+            .catch((err: yup.ValidationError) => {
+                if (!err.path) return;
+                setErrors({[err.path]: err.message});
+            });
+    }
+
+    useEffect(() => {
+        setErrors({});
+    }, [form]);
+
 
     function renderContent() {
         return (
@@ -32,25 +64,38 @@ export default function SignIn() {
                 >
                     Sign in
                 </Text>
-                <InputField
-                    containerStyle={{marginBottom: 30}}
-                    title="email"
-                    placeholder="darlenerobertson@mail.com"
-                    icon={<CheckSvg/>}
-                />
-                <InputField
-                    containerStyle={{marginBottom: 20}}
-                    title="password"
-                    placeholder="••••••••"
-                    secureTextEntry={true}
-                    icon={
-                        <TouchableOpacity>
-                            <EyeOffSvg/>
-                        </TouchableOpacity>
-                    }
-                />
+                <FormControl isInvalid={!!errors.email}>
+                    <InputField
+                        containerStyle={{marginBottom: 30}}
+                        title="email"
+                        placeholder="darlenerobertson@mail.com"
+                        icon={<CheckSvg/>}
+                        onchange={(v: string) => {
+                            setForm({...form, email: v})
+                        }}
+                    />
+                    <FormControl.ErrorMessage>{errors.email}</FormControl.ErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={!!errors.password}>
+                    <InputField
+                        containerStyle={{marginBottom: 20}}
+                        title="password"
+                        placeholder="••••••••"
+                        secureTextEntry={true}
+                        onchange={(v: string) => {
+                            setForm({...form, password: v})
+                        }}
+                        icon={
+                            <TouchableOpacity>
+                                <EyeOffSvg/>
+                            </TouchableOpacity>
+                        }
+                    />
+                    <FormControl.ErrorMessage>{errors.password}</FormControl.ErrorMessage>
+                </FormControl>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("ForgotPassword" as never)}
+                    onPress={() => {
+                    }}
                 >
                     <Text
                         style={{
@@ -68,9 +113,7 @@ export default function SignIn() {
                 <Button
                     title="Sign In"
                     containerStyle={{marginBottom: 20}}
-                    onPress={() => {
-                        navigation.navigate("MainLayout" as never)
-                    }}
+                    onPress={onSubmit}
                 />
                 <Button
                     title="create account"

@@ -35,3 +35,24 @@ export interface ISignUp {
     status: number,
     web_token: number
 }
+
+export interface IRegister {
+    name: string
+    password: string
+}
+
+export interface IStepOne {
+    firstName: string,
+    lastName: string,
+    email: string,
+    dateOfBirth: string,
+    screenName: string
+}
+
+export interface IStepTwo {
+    streetNumber: string,
+    streetName: string,
+    city: string,
+    country: string,
+    phone: string
+}

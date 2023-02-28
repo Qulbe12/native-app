@@ -1,5 +1,5 @@
 import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
+import React, {useState} from "react";
 // @ts-ignore
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
 import {useNavigation} from "@react-navigation/native";
@@ -7,9 +7,61 @@ import {useNavigation} from "@react-navigation/native";
 import {AndroidSafeArea, COLORS, FONTS, SIZES} from "../constants";
 import {Button, InputField} from "../components";
 import {CheckSvg, EyeOffSvg, FacebookSvg, GoogleSvg, TwitterSvg,} from "../svg";
+import {useAppDispatch} from "../redux/Store";
+import {register} from "../redux/authSlice";
+import * as yup from "yup";
+import {FormControl} from "native-base";
+
+const schema = yup.object().shape({
+    name: yup.string().required(),
+    password: yup.string().required(),
+});
 
 export default function SignUp() {
+    const dispatch = useAppDispatch()
     const navigation = useNavigation();
+    const [form, setForm] = useState({
+        name: "",
+        password: ""
+    })
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const onClick = () => {
+        schema
+            .validate(form)
+            .then(() => {
+                dispatch(register(form))
+                navigation.navigate("UserInfoScreen" as never)
+            })
+            .catch((err: yup.ValidationError) => {
+                if (!err.path) return;
+                setErrors({[err.path]: err.message});
+            });
+    }
+
+    function renderHeader() {
+        return (
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 42,
+                }}>
+
+                <Text
+                    style={{
+                        // @ts-ignore
+                        fontSize: 18,
+                        ...FONTS.H3,
+                        color: COLORS.black,
+                        textTransform: 'capitalize',
+                    }}>
+                    Step 1
+                </Text>
+            </View>
+        );
+    }
 
     function renderContent() {
         return (
@@ -30,29 +82,41 @@ export default function SignUp() {
                 >
                     Sign up
                 </Text>
-                <InputField
-                    containerStyle={{marginBottom: 30}}
-                    title="name"
-                    placeholder="Darlene Robertson"
-                    icon={<CheckSvg/>}
-                />
+                <FormControl isInvalid={!!errors.name}>
+                    <InputField
+                        containerStyle={{marginBottom: 30}}
+                        title="name"
+                        placeholder="Darlene Robertson"
+                        icon={<CheckSvg/>}
+                        onchange={(v: string) => {
+                            setForm({...form, name: v})
+                        }}
+                    />
+                    <FormControl.ErrorMessage>{errors.name}</FormControl.ErrorMessage>
+                </FormControl>
                 {/*<InputField*/}
                 {/*    containerStyle={{marginBottom: 30}}*/}
                 {/*    title="email"*/}
                 {/*    placeholder="darlenerobertson@mail.com"*/}
                 {/*    icon={<CheckSvg/>}*/}
                 {/*/>*/}
-                <InputField
-                    containerStyle={{marginBottom: 30}}
-                    title="password"
-                    placeholder="••••••••"
-                    secureTextEntry={true}
-                    icon={
-                        <TouchableOpacity>
-                            <EyeOffSvg/>
-                        </TouchableOpacity>
-                    }
-                />
+                <FormControl isInvalid={!!errors.password}>
+                    <InputField
+                        containerStyle={{marginBottom: 30}}
+                        title="password"
+                        placeholder="••••••••"
+                        secureTextEntry={true}
+                        onchange={(v: string) => {
+                            setForm({...form, password: v})
+                        }}
+                        icon={
+                            <TouchableOpacity>
+                                <EyeOffSvg/>
+                            </TouchableOpacity>
+                        }
+                    />
+                    <FormControl.ErrorMessage>{errors.password}</FormControl.ErrorMessage>
+                </FormControl>
                 {/*<InputField*/}
                 {/*    containerStyle={{marginBottom: 30}}*/}
                 {/*    title="confirm password"*/}
@@ -68,7 +132,7 @@ export default function SignUp() {
                 <Button
                     title="next"
                     containerStyle={{marginBottom: 20}}
-                    onPress={() => navigation.navigate("UserInfoScreen" as never)}
+                    onPress={onClick}
                 />
                 <View
                     style={{
@@ -120,6 +184,7 @@ export default function SignUp() {
 
     return (
         <SafeAreaView style={{...AndroidSafeArea.AndroidSafeArea}}>
+            {renderHeader()}
             {renderContent()}
         </SafeAreaView>
     );
