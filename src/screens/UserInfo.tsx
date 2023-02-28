@@ -37,7 +37,7 @@ const UserInfo = () => {
     function renderHeader() {
         return (
             <Header
-                title="Enter your personal information"
+                title="Step 1"
                 goBack={true}
                 onPress={() => navigation.goBack()}
             />

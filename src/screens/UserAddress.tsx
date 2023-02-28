@@ -13,7 +13,7 @@ const UserAddress = () => {
     function renderHeader() {
         return (
             <Header
-                title="Enter your complete address"
+                title="Step 2"
                 goBack={true}
                 onPress={() => navigation.goBack()}
             />
