@@ -110,7 +110,8 @@ export default function DishDescription() {
   ];
 
   const route = useRoute();
-  const {dish} = route.params;
+  // @ts-ignore
+  //   const {dish} = route.params;
 
   function renderSlider() {
     return (
@@ -127,95 +128,97 @@ export default function DishDescription() {
     );
   }
 
-  function renderDishInfo() {
-    return (
-      <View
-        style={{
-          paddingTop: 23,
-          paddingHorizontal: 16,
-          paddingBottom: 30,
-        }}>
-        <Text
-          style={{
-            ...FONTS.H2,
-            marginBottom: 10,
-            textTransform: 'capitalize',
-            color: COLORS.black,
-          }}>
-          {dish.name}
-        </Text>
-        <Text
-          style={{
-            ...FONTS.Lato_400Regular,
-            fontSize: 14,
-            color: COLORS.gray,
-            lineHeight: 14 * 1.5,
-            marginBottom: 10,
-          }}>
-          {dish.description}
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                ...FONTS.Lato_400Regular,
-                fontSize: 20,
-                color: COLORS.carrot,
-              }}>
-              ${dish.price}
-              {'  '}
-            </Text>
-            <Text
-              style={{
-                ...FONTS.Lato_400Regular,
-                fontSize: 14,
-                color: COLORS.gray,
-              }}>
-              {dish.weight}g
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <TouchableOpacity
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: COLORS.lightBlue,
-                borderRadius: 18,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <MinusSvg />
-            </TouchableOpacity>
-            <Text style={{marginHorizontal: 10}}>1</Text>
-            <TouchableOpacity
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: COLORS.lightBlue,
-                borderRadius: 18,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <MinusSvg />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  }
+  // function renderDishInfo() {
+  //   if (dish){
+  //       return (
+  //           <View
+  //               style={{
+  //                   paddingTop: 23,
+  //                   paddingHorizontal: 16,
+  //                   paddingBottom: 30,
+  //               }}>
+  //               <Text
+  //                   style={{
+  //                       ...FONTS.H2,
+  //                       marginBottom: 10,
+  //                       textTransform: 'capitalize',
+  //                       color: COLORS.black,
+  //                   }}>
+  //                   {dish.name}
+  //               </Text>
+  //               <Text
+  //                   style={{
+  //                       ...FONTS.Lato_400Regular,
+  //                       fontSize: 14,
+  //                       color: COLORS.gray,
+  //                       lineHeight: 14 * 1.5,
+  //                       marginBottom: 10,
+  //                   }}>
+  //                   {dish.description}
+  //               </Text>
+  //               <View
+  //                   style={{
+  //                       flexDirection: 'row',
+  //                       alignItems: 'center',
+  //                       justifyContent: 'space-between',
+  //                   }}>
+  //                   <View
+  //                       style={{
+  //                           flexDirection: 'row',
+  //                           alignItems: 'center',
+  //                       }}>
+  //                       <Text
+  //                           style={{
+  //                               ...FONTS.Lato_400Regular,
+  //                               fontSize: 20,
+  //                               color: COLORS.carrot,
+  //                           }}>
+  //                           ${dish.price}
+  //                           {'  '}
+  //                       </Text>
+  //                       <Text
+  //                           style={{
+  //                               ...FONTS.Lato_400Regular,
+  //                               fontSize: 14,
+  //                               color: COLORS.gray,
+  //                           }}>
+  //                           {dish.weight}g
+  //                       </Text>
+  //                   </View>
+  //                   <View
+  //                       style={{
+  //                           flexDirection: 'row',
+  //                           alignItems: 'center',
+  //                       }}>
+  //                       <TouchableOpacity
+  //                           style={{
+  //                               width: 36,
+  //                               height: 36,
+  //                               backgroundColor: COLORS.lightBlue,
+  //                               borderRadius: 18,
+  //                               alignItems: 'center',
+  //                               justifyContent: 'center',
+  //                           }}>
+  //                           <MinusSvg />
+  //                       </TouchableOpacity>
+  //                       <Text style={{marginHorizontal: 10}}>1</Text>
+  //                       <TouchableOpacity
+  //                           style={{
+  //                               width: 36,
+  //                               height: 36,
+  //                               backgroundColor: COLORS.lightBlue,
+  //                               borderRadius: 18,
+  //                               alignItems: 'center',
+  //                               justifyContent: 'center',
+  //                           }}>
+  //                           <MinusSvg />
+  //                       </TouchableOpacity>
+  //                   </View>
+  //               </View>
+  //           </View>
+  //       );
+  //   }
+  // }
 
   function renderTabs() {
     return (
@@ -223,6 +226,7 @@ export default function DishDescription() {
         offset={[0, 0]}
         distance={15}
         startColor={'rgba(6, 38, 100, 0.06)'}
+          // @ts-ignore
         finalColor={'rgba(6, 38, 100, 0.0)'}>
         <View
           style={{
@@ -243,8 +247,9 @@ export default function DishDescription() {
                 key={index}
                 onPress={() =>
                   item.screen === 'CartIsEmpty' && dishes.length !== 0
-                    ? navigation.navigate('Order')
-                    : navigation.navigate('MainLayout', {
+                    ? navigation.navigate('Order' as never)
+                      // @ts-ignore
+                    : navigation.navigate('MainLayout' , {
                         screen: item.screen,
                       })
                 }
@@ -322,17 +327,18 @@ export default function DishDescription() {
         }}>
         <Text
           style={{
+              // @ts-ignore
             fontSize: 18,
             ...FONTS.H3,
             color: COLORS.black,
             textTransform: 'capitalize',
             textAlign: 'center',
           }}>
-          {dish.name}
+          {/*{dish.name}*/}
         </Text>
       </View>
       {renderSlider()}
-      {renderDishInfo()}
+      {/*{renderDishInfo()}*/}
       {renderTabs()}
     </View>
   );

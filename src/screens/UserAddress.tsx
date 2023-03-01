@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AndroidSafeArea, COLORS, FONTS} from "../constants";
 import {SafeAreaView, Text, View} from "react-native";
 import {Button, Header, InputField} from "../components";
@@ -60,6 +60,10 @@ const UserAddress = () => {
                 setErrors({[err.path]: err.message});
             });
     }
+
+    useEffect(() => {
+        setErrors({});
+    }, [form]);
 
     function renderHeader() {
         return (

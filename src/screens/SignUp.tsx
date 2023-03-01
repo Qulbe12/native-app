@@ -1,5 +1,5 @@
 import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
 import {useNavigation} from "@react-navigation/native";
@@ -38,6 +38,10 @@ export default function SignUp() {
                 setErrors({[err.path]: err.message});
             });
     }
+
+    useEffect(() => {
+        setErrors({});
+    }, [form]);
 
     function renderHeader() {
         return (

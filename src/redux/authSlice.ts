@@ -1,13 +1,13 @@
-import {IAuthUser, IRegister, IStepOne, IStepTwo} from "../interfaces/dtos";
+import {IAuthUser, IRegister, ISignUpResponse, IStepOne, IStepTwo} from "../interfaces/dtos";
 import {createSlice} from "@reduxjs/toolkit";
 import {signInAction, signUpAction} from "./actions/authAction";
 
 export interface IAuthState {
-    user?: IAuthUser
+    user?: IAuthUser | ISignUpResponse
     stepOne: IStepOne
     register: IRegister
     stepTwo: IStepTwo
-    token: string
+    token?: string
     loading: boolean
     errors?: string
 }
@@ -44,6 +44,9 @@ export const authSlice = createSlice({
         },
         stepTwo: (state, action) => {
             state.stepTwo = action.payload
+        },
+        signOut: (state) => {
+            state.token = undefined
         }
     },
     extraReducers: (builder) => {
@@ -66,6 +69,7 @@ export const authSlice = createSlice({
             .addCase(signInAction.fulfilled, (state, action) => {
                 state.loading = false
                 state.user = action.payload
+                state.token = action.payload?.token
             })
             .addCase(signInAction.rejected, (state) => {
                 state.loading = false
@@ -74,6 +78,6 @@ export const authSlice = createSlice({
 })
 
 const authReducer = authSlice.reducer
-export const {register, stepTwo, stepOne} = authSlice.actions
+export const {register, stepOne, signOut} = authSlice.actions
 
 export default authReducer

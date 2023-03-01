@@ -21,9 +21,12 @@ import {
   LogOutSvg,
   EditSvg,
 } from '../svg';
+import {useAppDispatch} from "../redux/Store";
+import {signOut} from "../redux/authSlice";
 
 export default function Profile() {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch()
 
   function renderHeader() {
     return (
@@ -153,7 +156,7 @@ export default function Profile() {
         <ProfileCategory
           title="Sign Out"
           icon={<LogOutSvg />}
-          onPress={() => navigation.navigate('SignIn' as never)}
+          onPress={() => dispatch(signOut())}
         />
       </View>
     );

@@ -111,6 +111,7 @@ export default function SignIn() {
                 </TouchableOpacity>
 
                 <Button
+
                     title="Sign In"
                     containerStyle={{marginBottom: 20}}
                     onPress={onSubmit}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from "@react-navigation/native";
 // @ts-ignore
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
@@ -47,6 +47,10 @@ const UserInfo = () => {
             });
 
     }
+
+    useEffect(() => {
+        setErrors({});
+    }, [form]);
 
     const onChange = (event: any, selectedDate: any) => {
         const currentDate = selectedDate;
