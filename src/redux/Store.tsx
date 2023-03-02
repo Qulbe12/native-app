@@ -1,11 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import {configureStore} from '@reduxjs/toolkit'
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 import authReducer from "./authSlice";
+import merchantReducer from "./merchantsSlice";
 
 
 export const store = configureStore({
     reducer: {
-        auth : authReducer
+        auth: authReducer,
+        merchants: merchantReducer
     },
 })
 

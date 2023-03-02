@@ -6,20 +6,20 @@ export interface IUser {
     id: number,
     first_name: string,
     last_name: string,
-    company_name:string
-    uuid:string
+    company_name: string
+    uuid: string
     username: string,
     email: string,
     mobile: string,
     password: string,
     street_number: string
-    street_name:string
-    city:string
-    country:string
-    dob:string
-    screenName:string
-    contactPersonName:string
-    contactPersonPhone:string
+    street_name: string
+    city: string
+    country: string
+    dob: string
+    screenName: string
+    contactPersonName: string
+    contactPersonPhone: string
     address: string,
     photo: string,
     user_type_id: number,
@@ -27,6 +27,7 @@ export interface IUser {
     web_token: number
     UserRoles: string[]
 }
+
 export interface IAuthUser {
     token: string
     authUser: IUser
@@ -84,4 +85,42 @@ export interface IStepTwo {
     city: string,
     country: string,
     phone: string
+}
+
+interface IMerchantsRow {
+    "id": number,
+    "parent_id": number,
+    "first_name": string,
+    "last_name": string,
+    "company_name": string,
+    "uuid": string,
+    "username": string,
+    "email": string,
+    "mobile": string,
+    "password": string,
+    "street_number": string,
+    "street_name": string,
+    "city": string,
+    "country": string,
+    "dob": Date,
+    "screenName": string,
+    "contactPersonName": string,
+    "contactPersonPhone": string,
+    "address": string,
+    "photo": string,
+    "user_type_id": number,
+    "status": string,
+    "web_token": string,
+    "createdAt": Date,
+    "updatedAt": Date,
+    "deletedAt": Date
+}
+
+interface IMerchants {
+    count: number
+    rows: IMerchantsRow[]
+}
+
+export interface IMerchantsResponse {
+    merchants: IMerchants
 }

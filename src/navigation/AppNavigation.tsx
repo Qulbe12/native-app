@@ -31,48 +31,50 @@ import {
 import UserInfo from "../screens/UserInfo";
 import UserAddress from "../screens/UserAddress";
 import {useAppSelector} from "../redux/Store";
-import {Spinner} from "native-base";
+import Home from "../screens/Home";
 
 const Stack = createStackNavigator();
 
 export default function Navigation() {
-    const {user , loading, token} = useAppSelector(state => state.auth)
+    const {token} = useAppSelector(state => state.auth)
     if (!token) {
         return (
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerStyle: {
-                            elevation: 0,
-                            shadowOpacity: 0,
-                            borderBottomWidth: 0,
-                        },
-                        headerShown: false,
-                    }}
-                    initialRouteName="OnBoarding"
-                >
-                    <Stack.Screen name="OnBoarding" component={OnBoarding}/>
-                    <Stack.Screen name="Order" component={Order}/>
-                    <Stack.Screen name="Filter" component={Filter}/>
-                    <Stack.Screen
-                        name="PasswordHasBeenReset"
-                        component={PasswordHasBeenReset}
-                    />
-                    <Stack.Screen
-                        name="ForgotPassword"
-                        component={ForgotPassword}
-                    />
-                    <Stack.Screen name="ResetPassword" component={ResetPassword}/>
-                    <Stack.Screen name="SignUp" component={SignUp}/>
-                    <Stack.Screen name="SignIn" component={SignIn}/>
-                    <Stack.Screen name="UserInfoScreen" component={UserInfo}/>
-                    <Stack.Screen name="UserAddress" component={UserAddress}/>
-                </Stack.Navigator>
-            </NavigationContainer>
+            <>
+                <NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerStyle: {
+                                elevation: 0,
+                                shadowOpacity: 0,
+                                borderBottomWidth: 0,
+                            },
+                            headerShown: false,
+                        }}
+                        initialRouteName="OnBoarding"
+                    >
+                        <Stack.Screen name="OnBoarding" component={OnBoarding}/>
+                        <Stack.Screen name="Filter" component={Filter}/>
+                        <Stack.Screen
+                            name="PasswordHasBeenReset"
+                            component={PasswordHasBeenReset}
+                        />
+                        <Stack.Screen
+                            name="ForgotPassword"
+                            component={ForgotPassword}
+                        />
+                        <Stack.Screen name="ResetPassword" component={ResetPassword}/>
+                        <Stack.Screen name="SignUp" component={SignUp}/>
+                        <Stack.Screen name="SignIn" component={SignIn}/>
+                        <Stack.Screen name="UserInfoScreen" component={UserInfo}/>
+                        <Stack.Screen name="UserAddress" component={UserAddress}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </>
         )
     }
-        if (token){
-            return (
+    if (token) {
+        return (
+            <>
                 <NavigationContainer>
                     <Stack.Navigator
                         screenOptions={{
@@ -85,10 +87,17 @@ export default function Navigation() {
                         }}
                         initialRouteName="MainLayout"
                     >
+                        <Stack.Screen name="MainLayout" component={MainLayout}/>
+                        <Stack.Screen
+                            name="Home"
+                            component={Home}
+                        />
                         <Stack.Screen
                             name="DishDescription"
                             component={DishDescription}
                         />
+
+                        <Stack.Screen name="Order" component={Order}/>
                         <Stack.Screen name="Checkout" component={Checkout}/>
                         <Stack.Screen name="EditProfile" component={EditProfile}/>
                         <Stack.Screen
@@ -110,7 +119,7 @@ export default function Navigation() {
                             name="RestaurantMenu"
                             component={RestaurantMenu}
                         />
-                        <Stack.Screen name="MainLayout" component={MainLayout}/>
+
                         <Stack.Screen
                             name="ConfirmationCode"
                             component={ConfirmationCode}
@@ -121,9 +130,9 @@ export default function Navigation() {
                         />
                     </Stack.Navigator>
                 </NavigationContainer>
-            );
-        }
-
+            </>
+        );
+    }
 
 
 }
