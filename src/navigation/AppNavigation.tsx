@@ -28,10 +28,10 @@ import {
     SignUp,
     VerifyPhoneNumber,
 } from "../screens";
-import UserInfo from "../screens/UserInfo";
-import UserAddress from "../screens/UserAddress";
+import UserInfo from "../screens/account/UserInfo";
+import UserAddress from "../screens/account/UserAddress";
 import {useAppSelector} from "../redux/Store";
-import Home from "../screens/Home";
+import Home from "../screens/dashboard/Home";
 
 const Stack = createStackNavigator();
 

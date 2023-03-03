@@ -7,13 +7,15 @@ import {Toast} from "native-base";
 import {setSignUpError} from "../setErrorSlice";
 
 
-export const signUpAction = createAsyncThunk("auth/signUpAction", async (form: ISignUp , {dispatch}) => {
+export const signUpAction = createAsyncThunk("auth/signUpAction", async (form: ISignUp, {dispatch}) => {
     try {
         const res = await axiosInstance.post<ISignUpResponse>("users/add", form)
         console.log(res.data)
+        console.log("hiting")
         return res.data
     } catch (e: any) {
         dispatch(setSignUpError())
+        console.log("errors")
         Toast.show({
             title: "Cannot Register",
         })
