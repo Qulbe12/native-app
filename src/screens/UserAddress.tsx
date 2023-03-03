@@ -12,17 +12,18 @@ import * as yup from "yup";
 import {FormControl} from "native-base";
 
 const schema = yup.object().shape({
-    streetNumber: yup.string().required(),
-    streetName: yup.string().required(),
-    city: yup.string().required(),
-    country: yup.string().required(),
-    phone: yup.string().required(),
+    streetNumber: yup.string().required("Street name is required"),
+    streetName: yup.string().required("Street name is required"),
+    city: yup.string().required("City is required"),
+    country: yup.string().required("Country is required"),
+    phone: yup.string().required("Phone is required"),
 });
 
 const UserAddress = () => {
     const navigation = useNavigation();
     const dispatch = useAppDispatch()
     const {user} = useAppSelector(state => state.auth)
+    const {error} = useAppSelector(state => state.error)
     const {stepOne, stepTwo, register} = useAppSelector(state => state.auth)
     const [form, setForm] = useState({
         streetNumber: "",
@@ -51,9 +52,7 @@ const UserAddress = () => {
                     status: Math.floor(Math.random() * 10),
                     web_token: Math.floor(Math.random() * 20)
                 }))
-                console.log(stepTwo, stepOne, register)
-                console.log(stepOne, register)
-                console.log(user)
+                error ? navigation.navigate("SignIn" as never) : null
             })
             .catch((err: yup.ValidationError) => {
                 if (!err.path) return;
@@ -94,9 +93,8 @@ const UserAddress = () => {
                 >
                     Complete address
                 </Text>
-                <FormControl isInvalid={!!errors.streetNumber}>
+                <FormControl mb={30} isInvalid={!!errors.streetNumber}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Street number"
                         placeholder="#"
                         icon={<CheckSvg/>}
@@ -106,9 +104,8 @@ const UserAddress = () => {
                     />
                     <FormControl.ErrorMessage>{errors.streetNumber}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.streetName}>
+                <FormControl mb={30} isInvalid={!!errors.streetName}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Street name"
                         placeholder="Street"
                         icon={<CheckSvg/>}
@@ -118,9 +115,8 @@ const UserAddress = () => {
                     />
                     <FormControl.ErrorMessage>{errors.streetName}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.city}>
+                <FormControl mb={30} isInvalid={!!errors.city}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="City"
                         placeholder="City"
                         icon={<CheckSvg/>}
@@ -130,9 +126,8 @@ const UserAddress = () => {
                     />
                     <FormControl.ErrorMessage>{errors.city}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.country}>
+                <FormControl mb={30} isInvalid={!!errors.country}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Country"
                         placeholder="Country"
                         icon={<CheckSvg/>}
@@ -142,8 +137,8 @@ const UserAddress = () => {
                     />
                     <FormControl.ErrorMessage>{errors.country}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.phone}>
-                    <View style={{marginBottom: 30}}>
+                <FormControl mb={30} isInvalid={!!errors.phone}>
+                    <View>
                         <Text
                             style={{
                                 ...FONTS.Lato_400Regular,

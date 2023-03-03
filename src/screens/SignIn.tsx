@@ -14,8 +14,8 @@ import * as yup from "yup";
 import {FormControl} from "native-base";
 
 const schema = yup.object().shape({
-    email: yup.string().required().email(),
-    password: yup.string().required(),
+    email: yup.string().required("Email is required").email(),
+    password: yup.string().required(" Password is required"),
 });
 
 export default function SignIn() {
@@ -64,9 +64,8 @@ export default function SignIn() {
                 >
                     Sign in
                 </Text>
-                <FormControl isInvalid={!!errors.email}>
+                <FormControl mb={30} isInvalid={!!errors.email}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="email"
                         placeholder="darlenerobertson@mail.com"
                         icon={<CheckSvg/>}
@@ -76,9 +75,8 @@ export default function SignIn() {
                     />
                     <FormControl.ErrorMessage>{errors.email}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.password}>
+                <FormControl mb={20} isInvalid={!!errors.password}>
                     <InputField
-                        containerStyle={{marginBottom: 20}}
                         title="password"
                         placeholder="••••••••"
                         secureTextEntry={true}

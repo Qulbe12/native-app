@@ -13,8 +13,8 @@ import * as yup from "yup";
 import {FormControl} from "native-base";
 
 const schema = yup.object().shape({
-    name: yup.string().required(),
-    password: yup.string().required(),
+    name: yup.string().required("Name is required"),
+    password: yup.string().required("Password is required"),
 });
 
 export default function SignUp() {
@@ -86,9 +86,8 @@ export default function SignUp() {
                 >
                     Sign up
                 </Text>
-                <FormControl isInvalid={!!errors.name}>
+                <FormControl mb={30} isInvalid={!!errors.name}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="name"
                         placeholder="Darlene Robertson"
                         icon={<CheckSvg/>}
@@ -104,9 +103,8 @@ export default function SignUp() {
                 {/*    placeholder="darlenerobertson@mail.com"*/}
                 {/*    icon={<CheckSvg/>}*/}
                 {/*/>*/}
-                <FormControl isInvalid={!!errors.password}>
+                <FormControl mb={30} isInvalid={!!errors.password}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="password"
                         placeholder="••••••••"
                         secureTextEntry={true}

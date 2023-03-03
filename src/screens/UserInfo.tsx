@@ -10,13 +10,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {useAppDispatch} from "../redux/Store";
 import {stepOne} from "../redux/authSlice";
 import * as yup from "yup";
-import {FormControl} from "native-base";
+import {FormControl, View} from "native-base";
 
 const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    email: yup.string().required().email(),
-    screenName: yup.string().required(),
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string().required("Last name is required"),
+    email: yup.string().required("Email is required").email(),
+    screenName: yup.string().required("Screen name is required"),
 });
 
 const UserInfo = () => {
@@ -101,9 +101,8 @@ const UserInfo = () => {
                 >
                     Personal info
                 </Text>
-                <FormControl isInvalid={!!errors.firstName}>
+                <FormControl mb={30} isInvalid={!!errors.firstName}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="First name"
                         placeholder="Darlene"
                         icon={<CheckSvg/>}
@@ -113,9 +112,8 @@ const UserInfo = () => {
                     />
                     <FormControl.ErrorMessage>{errors.firstName}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.lastName}>
+                <FormControl mb={30} isInvalid={!!errors.lastName}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Last name"
                         placeholder="Robertson"
                         icon={<CheckSvg/>}
@@ -125,9 +123,8 @@ const UserInfo = () => {
                     />
                     <FormControl.ErrorMessage>{errors.lastName}</FormControl.ErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={!!errors.email}>
+                <FormControl mb={30} isInvalid={!!errors.email}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Email address"
                         placeholder="xyz@mail.com"
                         icon={<CheckSvg/>}
@@ -137,11 +134,13 @@ const UserInfo = () => {
                     />
                     <FormControl.ErrorMessage>{errors.email}</FormControl.ErrorMessage>
                 </FormControl>
+                <View mb={30}>
                 <TouchableOpacity onPress={
                     showDatepicker
                 }>
-                    <Text style={{marginTop: 10, marginBottom: 30}}>Date of Birth {date.toLocaleString()}</Text>
+                    <Text style={{marginTop: 10}}>Date of Birth {date.toLocaleString()}</Text>
                 </TouchableOpacity>
+                </View>
                 {show && (
                     <DateTimePicker
                         testID="dateTimePicker"
@@ -151,12 +150,10 @@ const UserInfo = () => {
                         onChange={onChange}
                     />
                 )}
-                <FormControl isInvalid={!!errors.screenName}>
+                <FormControl mb={30} isInvalid={!!errors.screenName}>
                     <InputField
-                        containerStyle={{marginBottom: 30}}
                         title="Screen Name"
                         placeholder="Robertson"
-                        secureTextEntry={true}
                         icon={<CheckSvg/>}
                         onchange={(v: string) => {
                             setForm({...form, screenName: v})
