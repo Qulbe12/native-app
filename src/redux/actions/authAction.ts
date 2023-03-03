@@ -10,6 +10,7 @@ import {setSignUpError} from "../setErrorSlice";
 export const signUpAction = createAsyncThunk("auth/signUpAction", async (form: ISignUp , {dispatch}) => {
     try {
         const res = await axiosInstance.post<ISignUpResponse>("users/add", form)
+        console.log(res.data)
         return res.data
     } catch (e: any) {
         dispatch(setSignUpError())

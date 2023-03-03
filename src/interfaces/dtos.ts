@@ -43,10 +43,10 @@ export interface ISignUp {
     last_name: string,
     username: string,
     email: string,
-    mobile: string,
+    mobile: number,
     password: string,
     address: string,
-    photo: string,
+    photo: number,
     user_type_id: number,
     status: number,
     web_token: number

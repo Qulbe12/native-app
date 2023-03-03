@@ -1,21 +1,34 @@
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Shadow} from 'react-native-shadow-2';
 import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {
-  ProfileArrowSvg,
-  StarTwoSvg,
-  SmallMapPin,
-  MinusSvg,
-  BasketSvg,
-  PromocodeAppliedSvg,
+    ProfileArrowSvg,
+    StarTwoSvg,
+    SmallMapPin,
+    MinusSvg,
+    BasketSvg,
+    PromocodeAppliedSvg, PlusSvg,
 } from '../svg';
 import {Button} from '../components';
 import {COLORS, FONTS, AndroidSafeArea, dummyData, dishes} from '../constants';
+import {menu} from "../constants/dummyData";
 
 export default function Order() {
+    const [count, setCount] = useState(0);
+    const incrementCount = () => {
+        setCount(count + 1);
+        console.log(count)
+    };
+    const decrementCount = () => {
+        if (count <= 0 ){
+            return
+        }else {
+            setCount(count - 1);
+        }
+    };
   const navigation = useNavigation();
     const route = useRoute();
 
@@ -139,6 +152,7 @@ export default function Order() {
                   alignItems: 'center',
                 }}>
                 <TouchableOpacity
+                    onPress={decrementCount}
                   style={{
                     width: 36,
                     height: 36,
@@ -149,8 +163,9 @@ export default function Order() {
                   }}>
                   <MinusSvg />
                 </TouchableOpacity>
-                <Text style={{marginHorizontal: 10}}>1</Text>
+                <Text style={{marginHorizontal: 10}}>{count}</Text>
                 <TouchableOpacity
+                    onPress={incrementCount}
                   style={{
                     width: 36,
                     height: 36,
@@ -159,7 +174,7 @@ export default function Order() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <MinusSvg />
+                  <PlusSvg />
                 </TouchableOpacity>
               </View>
             </View>
@@ -284,7 +299,7 @@ export default function Order() {
     return (
       <View style={{flex: 1}}>
         <SwipeListView
-          data={dishes}
+          data={menu}
           keyExtractor={item => `${item.id}`}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}

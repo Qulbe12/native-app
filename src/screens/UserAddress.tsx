@@ -30,7 +30,7 @@ const UserAddress = () => {
         streetName: "",
         city: "",
         country: "",
-        phone: ""
+        phone: 0
     })
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -44,10 +44,10 @@ const UserAddress = () => {
                     last_name: stepOne.lastName,
                     username: register.name,
                     email: stepOne.email,
-                    mobile: stepTwo.phone,
+                    mobile: form.phone,
                     password: register.password,
                     address: form.streetName,
-                    photo: "any",
+                    photo: 4444,
                     user_type_id: Math.floor(Math.random() * 100),
                     status: Math.floor(Math.random() * 10),
                     web_token: Math.floor(Math.random() * 20)
@@ -162,6 +162,7 @@ const UserAddress = () => {
                             initialCountry={'us'}
                             onChangePhoneNumber={(v) => {
                                 setForm({...form, phone: v})
+                                console.log(v)
                             }}
                             // initialValue="0123456789"
                         />

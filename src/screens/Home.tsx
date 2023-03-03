@@ -14,7 +14,16 @@ import {useNavigation} from '@react-navigation/native';
 import {Shadow} from 'react-native-shadow-2';
 
 import {COLORS, dummyData, FONTS} from '../constants';
-import { MicrophoneSvg, ViewAllSvg,} from '../svg';
+import {
+    ElementSvg,
+    FreeDeliverySvg,
+    FreeFromSvg,
+    MicrophoneSvg,
+    ProfileArrowSvg,
+    SmallMapPin,
+    StarSvg,
+    ViewAllSvg,
+} from '../svg';
 import {useAppDispatch, useAppSelector} from "../redux/Store";
 import {getMerchantsAction} from "../redux/actions/merchantsaction";
 
@@ -60,7 +69,7 @@ export default function Home() {
     function renderHeader() {
         return (
             <ImageBackground
-                source={{uri: 'https://via.placeholder.com/1125x540'}}
+                source={{uri: 'http://res.cloudinary.com/simpleview/image/upload/v1640823092/clients/orlandofl/185683_entrees_667152ec-7340-4428-91e7-72265329d7d0.jpg'}}
                 style={{
                     height: 180,
                     paddingHorizontal: 16,
@@ -90,73 +99,149 @@ export default function Home() {
         );
     }
 
-    // function renderCategories() {
-    //     return (
-    //         <View style={{top: -36}}>
-    //             <FlatList
-    //                 data={merchants?.merchants.rows}
-    //                 horizontal={true}
-    //                 keyExtractor={item => item.id.toString()}
-    //                 contentContainerStyle={{
-    //                     paddingLeft: 16,
-    //                     paddingBottom: 15,
-    //                 }}
-    //                 showsHorizontalScrollIndicator={false}
-    //                 renderItem={({item}) => (
-    //                     <View
-    //                         style={{
-    //                             marginRight: 10,
-    //                         }}>
-    //                         <Shadow
-    //                             offset={[0, 0]}
-    //                             distance={10}
-    //                             startColor={'rgba(6, 38, 100, 0.05)'}
-    //                             // @ts-ignore
-    //                             finalColor={'rgba(6, 38, 100, 0.0)'}>
-    //                             <TouchableOpacity
-    //                                 style={{
-    {/*                                    width: 73,*/}
-    {/*                                    height: 73,*/}
-    {/*                                    backgroundColor: COLORS.white,*/}
-    {/*                                    borderRadius: 20,*/}
-    {/*                                    justifyContent: 'center',*/}
-    {/*                                    alignItems: 'center',*/}
-    //                                 }}
-    //                                 onPress={() => {
-    //                                     setCategory("burger")
-    //                                     // @ts-ignore
-    //                                     navigation.navigate("RestaurantMenu", {restaurant: item} )
-    //                                 }}>
-    //                                 <View
-    //                                     style={{
-    {/*                                        width: 50,*/}
-    //                                         height: 50,
-    {/*                                        justifyContent: 'center',*/}
-    //                                         alignItems: 'center',
-    //                                     }}>
-    //                                     {/*{item.icon}*/}
-    //                                 </View>
-    //                             </TouchableOpacity>
-    //                         </Shadow>
-    //                         <Text
-    //                             style={{
-    //                                 textAlign: 'center',
-    //                                 marginTop: 8,
-    //                                 color:
-    //                                     category === "burger" ? COLORS.green : COLORS.gray,
-    //                                 ...FONTS.Lato_400Regular,
-    //                                 fontSize: 14,
-    //                                 lineHeight: 14 * 1.5,
-    //                                 textTransform: 'capitalize',
-    //                             }}>
-    //                             {item.company_name}
-    //                         </Text>
-    //                     </View>
-    //                 )}
-    //             />
-    //         </View>
-    //     );
-    // }
+    function renderPopularRestaurants() {
+        return (
+            <View style={{paddingHorizontal: 16}}>
+                <Text style={{...FONTS.H2, marginBottom: 8, color: COLORS.black}}>
+                    Previous Checkins
+                </Text>
+                {dummyData.map((item, index) => {
+
+                    return (
+                        <View key={index}>
+                            <Shadow
+                                offset={[0, 0]}
+                                distance={10}
+                                startColor={'rgba(6, 38, 100, 0.04)'}
+                                // @ts-ignore
+                                finalColor={'rgba(6, 38, 100, 0.0)'}>
+                                <TouchableOpacity
+                                    style={{
+                                        width: '100%',
+                                        height: 140,
+                                        backgroundColor: COLORS.white,
+                                        borderRadius: 20,
+                                        marginBottom: 8,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                    }}
+                                    onPress={() =>
+                                        // @ts-ignore
+                                        navigation.navigate('RestaurantMenu', {
+                                            restaurant: item,
+                                        })
+                                    }>
+                                    <ImageBackground
+                                        source={item.photo_426x420}
+                                        style={{width: 142, height: '100%'}}
+                                        imageStyle={{
+                                            borderTopLeftRadius: 20,
+                                            borderBottomLeftRadius: 20,
+                                        }}>
+                                        <View
+                                            style={{
+                                                height: 26,
+                                                backgroundColor: COLORS.carrot,
+                                                alignSelf: 'flex-start',
+                                                paddingHorizontal: 13,
+                                                borderRadius: 20,
+                                                right: -10,
+                                                top: 10,
+                                                flexDirection: 'row',
+                                                alignItems: 'center',
+                                            }}>
+                                            <StarSvg />
+                                            <Text
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontFamily: 'Lato-Regular',
+                                                    color: COLORS.white,
+                                                    marginLeft: 6,
+                                                }}>
+                                                {item.rating}
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                position: 'absolute',
+                                                right: 0,
+                                            }}>
+                                            <ElementSvg />
+                                        </View>
+                                    </ImageBackground>
+                                    <View
+                                        style={{
+                                            marginLeft: 20,
+                                            marginVertical: 20,
+                                            flex: 1,
+                                        }}>
+                                        <Text
+                                            style={{
+                                                ...FONTS.H4,
+                                                textTransform: 'capitalize',
+                                                lineHeight: 24 * 1.2,
+                                                color: COLORS.black,
+                                            }}
+                                            numberOfLines={1}>
+                                            {item.name}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                color: COLORS.gray,
+                                                fontFamily: 'Lato-Regular',
+                                                fontSize: 14,
+                                                marginBottom: 8,
+                                            }}>
+                                            {item.type}
+                                        </Text>
+                                        <View
+                                            style={{
+                                                flexDirection: 'row',
+                                                alignItems: 'center',
+                                            }}>
+                                            <SmallMapPin />
+                                            <Text
+                                                style={{
+                                                    marginLeft: 8,
+                                                    fontFamily: 'Lato-Regular',
+                                                    fontSize: 14,
+                                                    color: COLORS.black,
+                                                    marginBottom: 2,
+                                                }}>
+                                                {item.distance}
+                                            </Text>
+                                        </View>
+                                        {item.freeDelivery && <FreeDeliverySvg />}
+                                        {!item.freeDelivery && item.freeDeliveryFrom && (
+                                            <View
+                                                style={{
+                                                    flexDirection: 'row',
+                                                    alignItems: 'center',
+                                                }}>
+                                                <FreeFromSvg />
+                                                <Text
+                                                    style={{
+                                                        ...FONTS.Lato_400Regular,
+                                                        fontSize: 14,
+                                                        color: COLORS.black,
+                                                    }}>
+                                                    {' '}
+                                                    ${item.freeDeliveryFrom}
+                                                </Text>
+                                            </View>
+                                        )}
+                                    </View>
+                                    <View style={{paddingRight: 16}}>
+                                        <ProfileArrowSvg />
+                                    </View>
+                                </TouchableOpacity>
+                            </Shadow>
+                        </View>
+                    );
+                })}
+            </View>
+        );
+    }
 
     function renderHotOffers() {
         return (
@@ -178,15 +263,18 @@ export default function Home() {
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={dummyData}
+                    data={merchants?.merchants.rows}
                     horizontal={true}
                     contentContainerStyle={{paddingLeft: 16}}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item, index}) => {
                         return (
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{
+                                // @ts-ignore
+                                navigation.navigate("DishDescription" , {dish: item})
+                            }}>
                                 <Image
-                                    source={item.offer}
+                                    source={{uri: "https://d3aux7tjp119y2.cloudfront.net/images/Tak2-CMSTemplate_IrMZHla.width-1650.jpg"}}
                                     style={{
                                         width: 323,
                                         height: 160,
@@ -194,192 +282,15 @@ export default function Home() {
                                         borderRadius: 20,
                                     }}
                                 />
+                                <Text style={{...FONTS.H4, lineHeight: 32 * 1.2, color: COLORS.black}}>{item.company_name}</Text>
                             </TouchableOpacity>
+
                         );
                     }}
                 />
             </View>
         );
     }
-
-    // function renderPopularRestaurants() {
-    //     return (
-    //         <View style={{paddingHorizontal: 16}}>
-    //             <Text style={{...FONTS.H2, marginBottom: 8, color: COLORS.black}}>
-    //                 Popular Restaurants
-    //             </Text>
-    //             {dummyData.map((item, index) => {
-    //
-    //                 return (
-    //                     <View key={index}>
-    //                         <Shadow
-    //                             offset={[0, 0]}
-    //                             distance={10}
-    //                             startColor={'rgba(6, 38, 100, 0.04)'}
-    //                             // @ts-ignore
-    //                             finalColor={'rgba(6, 38, 100, 0.0)'}>
-    //                             <TouchableOpacity
-    //                                 style={{
-    //                                     width: '100%',
-    //                                     height: 140,
-    //                                     backgroundColor: COLORS.white,
-    //                                     borderRadius: 20,
-    //                                     marginBottom: 8,
-    //                                     flexDirection: 'row',
-    //                                     alignItems: 'center',
-    //                                 }}
-    //                                 onPress={() =>
-    //                                     // @ts-ignore
-    {/*                                    navigation.navigate('RestaurantMenu', {*/
-    }
-    {/*                                        restaurant: item,*/
-    }
-    {/*                                    })*/
-    }
-    {/*                                }>*/
-    }
-    {/*                                <ImageBackground*/
-    }
-    {/*                                    source={item.photo_426x420}*/
-    }
-    {/*                                    style={{width: 142, height: '100%'}}*/
-    }
-    //                                     imageStyle={{
-    //                                         borderTopLeftRadius: 20,
-    //                                         borderBottomLeftRadius: 20,
-    //                                     }}>
-    //                                     <View
-    //                                         style={{
-    //                                             height: 26,
-    //                                             backgroundColor: COLORS.carrot,
-    //                                             alignSelf: 'flex-start',
-    {/*                                            paddingHorizontal: 13,*/
-    }
-    {/*                                            borderRadius: 20,*/
-    }
-    {/*                                            right: -10,*/
-    }
-    //                                             top: 10,
-    //                                             flexDirection: 'row',
-    //                                             alignItems: 'center',
-    //                                         }}>
-    //                                         <StarSvg/>
-    //                                         <Text
-    {/*                                            style={{*/
-    }
-    {/*                                                fontSize: 12,*/
-    }
-    {/*                                                fontFamily: 'Lato-Regular',*/
-    }
-    //                                                 color: COLORS.white,
-    //                                                 marginLeft: 6,
-    //                                             }}>
-    //                                             {item.rating}
-    //                                         </Text>
-    //                                     </View>
-    {/*                                    <View*/
-    }
-    {/*                                        style={{*/
-    }
-    {/*                                            position: 'absolute',*/
-    }
-    //                                             right: 0,
-    //                                         }}>
-    //                                         <ElementSvg/>
-    //                                     </View>
-    {/*                                </ImageBackground>*/
-    }
-    {/*                                <View*/
-    }
-    {/*                                    style={{*/
-    }
-    {/*                                        marginLeft: 20,*/
-    }
-    //                                         marginVertical: 20,
-    //                                         flex: 1,
-    //                                     }}>
-    //                                     <Text
-    //                                         style={{
-    //                                             ...FONTS.H4,
-    //                                             textTransform: 'capitalize',
-    //                                             lineHeight: 24 * 1.2,
-    //                                             color: COLORS.black,
-    //                                         }}
-    //                                         numberOfLines={1}>
-    //                                         {item.name}
-    //                                     </Text>
-    //                                     <Text
-    //                                         style={{
-    //                                             color: COLORS.gray,
-    //                                             fontFamily: 'Lato-Regular',
-    //                                             fontSize: 14,
-    //                                             marginBottom: 8,
-    //                                         }}>
-    {/*                                        {item.type}*/
-    }
-    {/*                                    </Text>*/
-    }
-    //                                     <View
-    //                                         style={{
-    //                                             flexDirection: 'row',
-    //                                             alignItems: 'center',
-    //                                         }}>
-    //                                         <SmallMapPin/>
-    //                                         <Text
-    //                                             style={{
-    //                                                 marginLeft: 8,
-    //                                                 fontFamily: 'Lato-Regular',
-    //                                                 fontSize: 14,
-    //                                                 color: COLORS.black,
-    //                                                 marginBottom: 2,
-    //                                             }}>
-    //                                             {item.distance}
-    {/*                                        </Text>*/
-    }
-    {/*                                    </View>*/
-    }
-    {/*                                    {item.freeDelivery && <FreeDeliverySvg/>}*/
-    }
-    {/*                                    {item.freeDelivery === false && item.freeDeliveryFrom && (*/
-    }
-    {/*                                        <View*/
-    }
-    {/*                                            style={{*/
-    }
-    {/*                                                flexDirection: 'row',*/
-    }
-    {/*                                                alignItems: 'center',*/
-    }
-    //                                             }}>
-    //                                             <FreeFromSvg/>
-    //                                             <Text
-    //                                                 style={{
-    {/*                                                    ...FONTS.Lato_400Regular,*/
-    }
-    {/*                                                    fontSize: 14,*/
-    }
-    {/*                                                    color: COLORS.black,*/
-    }
-    {/*                                                }}>*/
-    }
-    //                                                 {' '}
-    //                                                 ${item.freeDeliveryFrom}
-    //                                             </Text>
-    //                                         </View>
-    //                                     )}
-    {/*                                </View>*/
-    }
-    //                                 <View style={{paddingRight: 16}}>
-    //                                     <ProfileArrowSvg/>
-    //                                 </View>
-    //                             </TouchableOpacity>
-    //                         </Shadow>
-    //                     </View>
-    //                 );
-    //             })}
-    //         </View>
-    //     );
-    // }
 
     return (
         <View style={{flex: 1}}>
@@ -390,7 +301,7 @@ export default function Home() {
                 {renderHeader()}
                 {/*{renderCategories()}*/}
                 {renderHotOffers()}
-                {/*{renderPopularRestaurants()}*/}
+                {renderPopularRestaurants()}
             </ScrollView>
         </View>
     );

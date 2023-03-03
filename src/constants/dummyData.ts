@@ -81,6 +81,30 @@ const dishes = [
     },
 ];
 
+const menu = [
+    {
+        id: "1",
+        name: "Caramel cake with beries",
+        description:
+            "Qui ex aute ipsum duis. Incididunt adipisicing voluptate laborum",
+        price: "6.95",
+        weight: "350",
+        photo_312x324: {
+            uri: "https://via.placeholder.com/312x324",
+        },
+        photo_477x300: {
+            uri: "https://via.placeholder.com/477x300",
+        },
+        addedToCart: false,
+        images: [
+            { id: "1", uri: "https://via.placeholder.com/1125x1800" },
+            { id: "2", uri: "https://via.placeholder.com/1125x1800" },
+            { id: "3", uri: "https://via.placeholder.com/1125x1800" },
+        ],
+    },
+
+];
+
 const dummyData = [
     {
         id: "1",
@@ -198,4 +222,4 @@ const dummyData = [
     },
 ];
 
-export { dummyData, dishes };
+export { dummyData, dishes , menu };
