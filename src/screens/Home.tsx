@@ -14,37 +14,37 @@ import {useNavigation} from '@react-navigation/native';
 import {Shadow} from 'react-native-shadow-2';
 
 import {COLORS, dummyData, FONTS} from '../constants';
-import {BurgerSvg, DoughnutSvg, GuacamoleSvg, MicrophoneSvg, PizzaSvg, SushiSvg, ViewAllSvg,} from '../svg';
+import { MicrophoneSvg, ViewAllSvg,} from '../svg';
 import {useAppDispatch, useAppSelector} from "../redux/Store";
 import {getMerchantsAction} from "../redux/actions/merchantsaction";
 
-const categories = [
-    {
-        id: '1',
-        category: 'Burger',
-        icon: <BurgerSvg/>,
-    },
-    {
-        id: '2',
-        category: 'Salads',
-        icon: <GuacamoleSvg/>,
-    },
-    {
-        id: '3',
-        category: 'Pizza',
-        icon: <PizzaSvg/>,
-    },
-    {
-        id: '4',
-        category: 'Sushi',
-        icon: <SushiSvg/>,
-    },
-    {
-        id: '5',
-        category: 'Deserts',
-        icon: <DoughnutSvg/>,
-    },
-];
+// const categories = [
+//     {
+//         id: '1',
+//         category: 'Burger',
+//         icon: <BurgerSvg/>,
+//     },
+//     {
+//         id: '2',
+//         category: 'Salads',
+//         icon: <GuacamoleSvg/>,
+//     },
+//     {
+//         id: '3',
+//         category: 'Pizza',
+//         icon: <PizzaSvg/>,
+//     },
+//     {
+//         id: '4',
+//         category: 'Sushi',
+//         icon: <SushiSvg/>,
+//     },
+//     {
+//         id: '5',
+//         category: 'Deserts',
+//         icon: <DoughnutSvg/>,
+//     },
+// ];
 
 export default function Home() {
     const navigation = useNavigation();
@@ -90,73 +90,77 @@ export default function Home() {
         );
     }
 
-    function renderCategories() {
-        return (
-            <View style={{top: -36}}>
-                <FlatList
-                    data={merchants?.merchants.rows}
-                    horizontal={true}
-                    keyExtractor={item => item.id.toString()}
-                    contentContainerStyle={{
-                        paddingLeft: 16,
-                        paddingBottom: 15,
-                    }}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({item}) => (
-                        <View
-                            style={{
-                                marginRight: 10,
-                            }}>
-                            <Shadow
-                                offset={[0, 0]}
-                                distance={10}
-                                startColor={'rgba(6, 38, 100, 0.05)'}
-                                // @ts-ignore
-                                finalColor={'rgba(6, 38, 100, 0.0)'}>
-                                <TouchableOpacity
-                                    style={{
-                                        width: 73,
-                                        height: 73,
-                                        backgroundColor: COLORS.white,
-                                        borderRadius: 20,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                    onPress={() => setCategory("burger")}>
-                                    <View
-                                        style={{
-                                            width: 50,
-                                            height: 50,
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}>
-                                        {/*{item.icon}*/}
-                                    </View>
-                                </TouchableOpacity>
-                            </Shadow>
-                            <Text
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 8,
-                                    color:
-                                        category === "burger" ? COLORS.green : COLORS.gray,
-                                    ...FONTS.Lato_400Regular,
-                                    fontSize: 14,
-                                    lineHeight: 14 * 1.5,
-                                    textTransform: 'capitalize',
-                                }}>
-                                {item.company_name}
-                            </Text>
-                        </View>
-                    )}
-                />
-            </View>
-        );
-    }
+    // function renderCategories() {
+    //     return (
+    //         <View style={{top: -36}}>
+    //             <FlatList
+    //                 data={merchants?.merchants.rows}
+    //                 horizontal={true}
+    //                 keyExtractor={item => item.id.toString()}
+    //                 contentContainerStyle={{
+    //                     paddingLeft: 16,
+    //                     paddingBottom: 15,
+    //                 }}
+    //                 showsHorizontalScrollIndicator={false}
+    //                 renderItem={({item}) => (
+    //                     <View
+    //                         style={{
+    //                             marginRight: 10,
+    //                         }}>
+    //                         <Shadow
+    //                             offset={[0, 0]}
+    //                             distance={10}
+    //                             startColor={'rgba(6, 38, 100, 0.05)'}
+    //                             // @ts-ignore
+    //                             finalColor={'rgba(6, 38, 100, 0.0)'}>
+    //                             <TouchableOpacity
+    //                                 style={{
+    {/*                                    width: 73,*/}
+    {/*                                    height: 73,*/}
+    {/*                                    backgroundColor: COLORS.white,*/}
+    {/*                                    borderRadius: 20,*/}
+    {/*                                    justifyContent: 'center',*/}
+    {/*                                    alignItems: 'center',*/}
+    //                                 }}
+    //                                 onPress={() => {
+    //                                     setCategory("burger")
+    //                                     // @ts-ignore
+    //                                     navigation.navigate("RestaurantMenu", {restaurant: item} )
+    //                                 }}>
+    //                                 <View
+    //                                     style={{
+    {/*                                        width: 50,*/}
+    //                                         height: 50,
+    {/*                                        justifyContent: 'center',*/}
+    //                                         alignItems: 'center',
+    //                                     }}>
+    //                                     {/*{item.icon}*/}
+    //                                 </View>
+    //                             </TouchableOpacity>
+    //                         </Shadow>
+    //                         <Text
+    //                             style={{
+    //                                 textAlign: 'center',
+    //                                 marginTop: 8,
+    //                                 color:
+    //                                     category === "burger" ? COLORS.green : COLORS.gray,
+    //                                 ...FONTS.Lato_400Regular,
+    //                                 fontSize: 14,
+    //                                 lineHeight: 14 * 1.5,
+    //                                 textTransform: 'capitalize',
+    //                             }}>
+    //                             {item.company_name}
+    //                         </Text>
+    //                     </View>
+    //                 )}
+    //             />
+    //         </View>
+    //     );
+    // }
 
     function renderHotOffers() {
         return (
-            <View style={{top: -25, marginBottom: 5}}>
+            <View style={{top: 0, marginBottom: 5}}>
                 <View
                     style={{
                         flexDirection: 'row',
@@ -167,7 +171,7 @@ export default function Home() {
                     }}>
                     <Text
                         style={{...FONTS.H2, lineHeight: 32 * 1.2, color: COLORS.black}}>
-                        Previous checkin
+                        Restaurants
                     </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('AllOffers' as never)}>
                         <ViewAllSvg/>
@@ -384,7 +388,7 @@ export default function Home() {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{flexGrow: 1, paddingBottom: 20}}>
                 {renderHeader()}
-                {renderCategories()}
+                {/*{renderCategories()}*/}
                 {renderHotOffers()}
                 {/*{renderPopularRestaurants()}*/}
             </ScrollView>

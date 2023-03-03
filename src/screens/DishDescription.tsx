@@ -1,10 +1,11 @@
 import {Image, StatusBar, Text, TouchableOpacity, View,} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Shadow} from 'react-native-shadow-2';
 
 import {COLORS, dishes, FONTS, SIZES} from '../constants';
-import {ArrowSvg, BagSvg, HeartSvg, HomeSvg, MinusSvg, PlaceSvg, ProfileSvg,} from '../svg';
+import {ArrowSvg, BagSvg, HeartSvg, HomeSvg, MinusSvg, PlaceSvg, PlusSvg, ProfileSvg,} from '../svg';
+import {Button} from "../components";
 
 export default function DishDescription() {
     const navigation = useNavigation();
@@ -113,6 +114,18 @@ export default function DishDescription() {
     }
 
     function renderDishInfo() {
+        const [count, setCount] = useState(0);
+        const incrementCount = () => {
+            setCount(count + 1);
+            console.log(count)
+        };
+        const decrementCount = () => {
+            if (count <= 0 ){
+                return
+            }else {
+                setCount(count - 1);
+            }
+        };
 
         return (
             <View
@@ -175,6 +188,7 @@ export default function DishDescription() {
                             alignItems: 'center',
                         }}>
                         <TouchableOpacity
+                            onPress={decrementCount}
                             style={{
                                 width: 36,
                                 height: 36,
@@ -185,8 +199,9 @@ export default function DishDescription() {
                             }}>
                             <MinusSvg/>
                         </TouchableOpacity>
-                        <Text style={{marginHorizontal: 10}}>1</Text>
+                        <Text style={{marginHorizontal: 10}}>{count}</Text>
                         <TouchableOpacity
+                            onPress={incrementCount}
                             style={{
                                 width: 36,
                                 height: 36,
@@ -195,10 +210,14 @@ export default function DishDescription() {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                             }}>
-                            <MinusSvg/>
+                            <PlusSvg/>
                         </TouchableOpacity>
                     </View>
                 </View>
+                <Button title="Add to cart" onPress={()=>{
+                    // @ts-ignore
+                    navigation.navigate("Order" , {dish: dishes})
+                }} on containerStyle={{marginTop: 30}}/>
             </View>
         );
     }

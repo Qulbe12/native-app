@@ -124,3 +124,4 @@ interface IMerchants {
 export interface IMerchantsResponse {
     merchants: IMerchants
 }
+

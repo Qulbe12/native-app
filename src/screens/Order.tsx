@@ -2,7 +2,7 @@ import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Shadow} from 'react-native-shadow-2';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {
   ProfileArrowSvg,
@@ -17,6 +17,7 @@ import {COLORS, FONTS, AndroidSafeArea, dummyData, dishes} from '../constants';
 
 export default function Order() {
   const navigation = useNavigation();
+    const route = useRoute();
 
   function renderHeader() {
     return (

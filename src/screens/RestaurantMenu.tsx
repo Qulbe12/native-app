@@ -198,7 +198,7 @@ export default function RestaurantMenu() {
                 color: COLORS.white,
                 textTransform: 'capitalize',
               }}>
-              {restaurant.name}
+              {restaurant.company_name}
             </Text>
             <Text
               style={{
@@ -207,7 +207,7 @@ export default function RestaurantMenu() {
                 color: COLORS.white,
                 textTransform: 'capitalize',
               }}>
-              {restaurant.type}
+                Restaurant Type
             </Text>
           </View>
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
